@@ -240,3 +240,67 @@ button, input, select{
   margin-top: 8px;
   border-left: 4px solid var(--terrakotta-base);
 }
+.services-section{
+    padding: 90px 0;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+.section-title-wrap{
+    text-align: center;
+    margin-bottom: 56px;
+}
+.section-title-wrap h2{
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.section-title-wrap p{
+    font-size: 16px;
+    max-width: 580px;
+    margin: 0 auto;
+}
+.services-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+.service-card{
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.service-card:hover{
+    transform: translateY(-6px);
+    border-color: var(--terrakotta-base);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+}
+.service-img-placeholder{
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, var(--terrakotta-soft) 0%, var(--terrakotta-light) 100%);
+    border: 1px solid var(--terrakotta-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    margin-bottom: 20px;
+}
+.service-card h3{
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.service-card p{
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}

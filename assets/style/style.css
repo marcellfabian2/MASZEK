@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Marcellus&family=Oswald:wght@200..700&family=Protest+Guerrilla&family=Tagesschrift&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --terrakotta-base: #D85A30;
+    --terrakotta-dark: #712B13;
+    --terrakotta-deep: #4A1B0C;
+    --terrakotta-light: #F5C4B3;
+    --terrakotta-soft: #FAECE7;
+    --terrakotta-mid: #F0997B;
+
+    --teal-base: #1D9E75;
+    --teal-dark: #085041;
+    --teal-deep: #04342C;
+    --teal-light: #9FE1CB;
+    --teal-soft: #E1F5EE;
+    --teal-mid: #5DCAA5;
+
+    --ink-primary: #2C2C2A;
+    --ink-secondary: #5F5E5A;
+    --ink-muted: #888780;
+    --bg-light: #F1EFE8;
+    --border-color: #D3D1C7;
+    --card-bg: #FFFFFF;
+
+    font-family: "Marcellus", serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background: var(--bg-light);
+    color: var(--ink-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+h1,h2,h3,h4{
+    font-family: "Archivo", serif;
+    letter-spacing: -0.02em;
+    color: var(--ink-primary);
+    line-height: 1.15;
+}
+p{
+    color: var(--ink-secondary);
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+button, input, select{
+    font-family: inherit;
+}
+.wrap{
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.topbar{
+    background-color: var(--terrakotta-dark);
+    color: #FFF;
+    padding: 25px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    height: 13dvh;
+}
+.topbar .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 100px;
+}
+.brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 22px;
+    color: #FFF;
+}
+.brand-mark{
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+.nav-links{
+    display: flex;
+    gap: 24px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.nav-links a{
+    color: var(--terrakotta-soft);
+    transition: color 0.2s;
+}
+.nav-links a:hover{
+    color: #FFF;
+}
+.auth-btns{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn:hover{
+    transform: translateY(-2px);
+}
+.btn:active{
+    transform: translateY(0);
+}
+.btn-primary{
+    background: var(--terrakotta-base);
+    color: #FFF;
+    box-shadow: 0 4px 14px rgba(216, 90, 48, 0.35);
+}
+.btn-primary:hover{
+    background: #C24D26;
+}
+.btn-teal{
+    background: var(--teal-base);
+    color: #FFF;
+    box-shadow: 0 4px 14px rgba(29, 158, 117, 0.3);
+}
+.btn-teal:hover{
+    background: #168562;
+}
+.btn-outline{
+    background: transparent;
+    border: 1.5px solid var(--terrakotta-light);
+    color: #FFF;
+}
+.btn-outline:hover{
+    background: rgba(255, 255, 255, 0.1);
+}
+.hero{
+    background: linear-gradient(180deg, var(--terrakotta-dark) 0%, var(--terrakotta-deep) 100%);
+    color: #FFF;
+    padding: 80px 0 100px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hero h1{
+    font-size: clamp(38px, 5.5vw, 62px);
+    color: #FFF;
+    font-weight: 900;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+}
+.hero h1 span{
+    color: var(--terrakotta-mid);
+}
+.hero-sub{
+    font-size: 18px;
+    color: var(--terrakotta-soft);
+    max-width: 680px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+}
+.hero-search-wrap{
+    max-width: 720px;
+    margin: 0 auto 40px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 14px;
+    display: flex;
+    gap: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.search-input{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    background: var(--terrakotta-soft);
+    border-radius: 10px;
+}
+.search-input input{
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 14px 0;
+    font-size: 15px;
+    color: var(--ink-primary);
+    outline: none;
+}

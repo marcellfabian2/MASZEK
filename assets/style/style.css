@@ -515,3 +515,92 @@ button, input, select{
 .step-text p{ 
     font-size: 14px; 
 }
+.calculator-section{
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal-dark) 100%);
+    color: #FFF;
+    border-bottom: 1px solid var(--border-color);
+}
+.calc-card{
+    max-width: 680px; 
+    margin: 0 auto;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--teal-light);
+    border-radius: 18px; 
+    padding: 32px;
+    backdrop-filter: blur(10px);
+}
+.calc-card h3{ 
+    color: #FFF; 
+    font-size: 22px; 
+    font-weight: 800; 
+    margin-bottom: 16px; 
+    text-transform: uppercase; 
+}
+.calc-grid{ 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 16px; 
+    margin-bottom: 20px; 
+}
+.calc-field select, .calc-field input{
+    width: 100%;
+    padding: 12px; 
+    border-radius: 8px; 
+    border: 1px solid var(--teal-mid);
+    background: var(--card-bg);
+    color: var(--ink-primary); 
+    font-size: 14px; 
+    outline: none;
+}
+.calc-result{
+    background: var(--teal-soft); 
+    color: var(--teal-deep);
+    padding: 16px; 
+    border-radius: 10px; 
+    font-weight: 700; 
+    text-align: center;
+    font-size: 16px;
+}
+.about-section{
+    padding: 90px 0;
+    background: var(--terrakotta-soft);
+    border-bottom: 1px solid var(--terrakotta-light);
+    text-align: center;
+}
+.about-content{ 
+    max-width: 720px; 
+    margin: 0 auto; 
+}
+.about-section h2{ 
+    font-size: 36px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    margin-bottom: 16px; 
+}
+.about-section p{ 
+    font-size: 16px; 
+    color: var(--ink-primary); 
+    line-height: 1.7; 
+    margin-bottom: 32px; 
+}
+.stats-row{ 
+    display: flex; 
+    justify-content: center;
+     gap: 48px; 
+    margin-bottom: 36px; 
+    flex-wrap: wrap; 
+}
+.stat-item b{ 
+    font-family: "Archivo", sans-serif; 
+    font-size: 36px; 
+    color: var(--terrakotta-dark); 
+    display: block; 
+    font-weight: 900; 
+}
+.stat-item span{ 
+    font-size: 13px; 
+    color: var(--ink-secondary); 
+    font-weight: 700; 
+    text-transform: uppercase; 
+}

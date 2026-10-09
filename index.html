@@ -210,6 +210,43 @@
         </div>
         </div>
     </section>
+    <section class="calculator-section" id="kalkulator">
+        <div class="wrap">
+            <div class="calc-card">
+                <h3>💡 GYORS ÁRBECSLŐ KALKULÁTOR</h3>
+                <p style="color:var(--teal-light); font-size:14px; margin-bottom:20px;">Próbáld ki, körülbelül milyen munkadíjra számíthatsz!</p>
+                <div class="calc-grid">
+                    <div class="calc-field">
+                        <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px; color:#FFF;">Szakma kiválasztása:</label>
+                        <select id="calcTrade" onchange="updateCalc()">
+                            <option value="15000">Festés (m² alapon)</option>
+                            <option value="25000">Villanyszerelés (kiállás alapon)</option>
+                            <option value="30000">Vízvezeték (pont alapon)</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px; color:#FFF;">Mennyiség (db / m²):</label>
+                        <input type="number" id="calcAmount" value="10" min="1" oninput="updateCalc()">
+                    </div>
+                </div>
+                <div class="calc-result" id="calcOutput">
+                    Becsült munkadíj: ~ 150 000 Ft
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about-section" id="rolunk">
+        <div class="wrap about-content">
+            <h2>RÓLUNK</h2>
+            <p>A MASZEK küldetése,hogy modern, átlátható és megbízható platformot biztosítson a hazai szakemberek és lakossági megrendelők számára. Elkötelezettek vagyunk a minőségi munkavégzés és a tiszta kommunikáció mellett.</p>
+            <div class="stats-row">
+                <div class="stat-item"><b>120+</b><span>AKTÍV MESTER</span></div>
+                <div class="stat-item"><b>4.9 ★</b><span>ÁTLAGOS ÉRTÉKELÉS</span></div>
+                <div class="stat-item"><b>500+</b><span>ELVÉGZETT MUNKA</span></div>
+            </div>
+            <button class="btn btn-primary" onclick="openModal('register')">TUDJ MEG TÖBBET</button>
+        </div>
+    </section>
     <script src="assets/script/script.js"></script>
 </body>
 </html>

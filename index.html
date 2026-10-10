@@ -5,9 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MASZEK</title>
     <link rel="icon" type="image/png" href="assets/image/maszek_logo.svg">
+    <script>
+        document.documentElement.classList.add('js', 'is-covered');
+        setTimeout(function () {
+            if (!document.documentElement.classList.contains('js-ready')) {
+                document.documentElement.classList.remove('js', 'is-covered');
+            }
+        }, 3000);
+    </script>
     <link rel="stylesheet" href="assets/style/style.css">
 </head>
 <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cover" id="cover" role="region" aria-label="Üdvözlő képernyő">
+        <div class="cover-icons" aria-hidden="true">
+            <span style="--x:10%;--y:20%;--d:0s">⚡</span>
+            <span style="--x:84%;--y:16%;--d:1.2s">💧</span>
+            <span style="--x:16%;--y:70%;--d:2.1s">🎨</span>
+            <span style="--x:80%;--y:66%;--d:0.7s">🔧</span>
+            <span style="--x:90%;--y:42%;--d:1.8s">🏠</span>
+        </div>
+        <div class="cover-inner">
+            <img class="cover-logo" src="assets/image/maszek_fullLogo.png" alt="MASZEK">
+            <span class="cover-eyebrow">Magyar Szakember Kereső</span>
+            <h2 class="cover-title" aria-label="Minden hibára van egy jó mester.">
+                <span class="word" aria-hidden="true" style="--w:0"><span>Minden</span></span>
+                <span class="word" aria-hidden="true" style="--w:1"><span>hibára</span></span>
+                <span class="word" aria-hidden="true" style="--w:2"><span>van</span></span>
+                <span class="word" aria-hidden="true" style="--w:3"><span>egy</span></span>
+                <span class="word" aria-hidden="true" style="--w:4"><span>jó</span></span>
+                <span class="word" aria-hidden="true" style="--w:5"><span><em>mester.</em></span></span>
+            </h2>
+            <p class="cover-sub">Villanyszerelő, vízvezeték-szerelő, festő, magántanár – a MASZEK egy helyre hozza a megbízható magyar szakembereket és mindazokat, akiknek épp szükségük van rájuk.</p>
+        </div>
+        <button class="scroll-hint" type="button" aria-label="Görgess a továbbiakért">
+            <span class="mouse" aria-hidden="true"></span>
+        </button>
+    </div>
     <header class="topbar">
         <div class="wrap">
             <div class="brand">
@@ -26,7 +60,7 @@
             </div>
         </div>
     </header>
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="wrap">
             <h1>SZAKEMBER KERESŐ <span>PLATFORM</span></h1>
             <p class="hero-sub"><b>Megbízható szakembert keresel? Találd meg egyszerűen, gyorsan és biztonságosan!</b> Böngéssz a különböző területek szakemberei között, hasonlítsd össze a lehetőségeket, és találd meg azt, aki a legjobban illik az igényeidhez.</p>
@@ -37,7 +71,7 @@
                 </div>
                 <button class="btn btn-primary">Keresés</button>
             </div>
-            <div>
+            <div class="hero-cta">
                 <button class="btn btn-teal">VÁGJUNK BELE</button>
             </div>
             <div class="platform-preview-grid">
@@ -75,13 +109,14 @@
             </div>
         </div>
     </section>
+    <p></p>
     <section class="services-section" id="szolgaltatasok">
         <div class="wrap">
-            <div class="section-title-wrap">
+            <div class="section-title-wrap" data-reveal>
                 <h2>SZOLGÁLTATÁSAINK</h2>
                 <p>Válassz a legnépszerűbb szakterületek közül és találj megfelelő mestert a feladatra.</p>
             </div>
-            <div class="services-grid">
+            <div class="services-grid" id="servicesGrid" data-stagger>
                 <div class="service-card">
                     <div>
                         <div class="service-img-placeholder">⚡</div>
@@ -111,11 +146,11 @@
     </section>
     <section class="features-section" id="funkciok">
         <div class="wrap">
-            <div class="section-title-wrap">
+            <div class="section-title-wrap" data-reveal>
                 <h2>A PLATFORM ELŐNYEI</h2>
                 <p>Minden funkciót úgy terveztünk, hogy a folyamat gyors és biztonságos legyen.</p>
             </div>
-            <div class="features-grid">
+            <div class="features-grid" data-stagger>
                 <div class="feature-box">
                     <div class="feature-icon">🗓️</div>
                     <h4>Egyszerű egyeztetés</h4>
@@ -142,26 +177,26 @@
     <section class="split-section" id="folyamat">
         <div class="wrap split-grid">
             <div class="why-us-content">
-                <div class="why-us-visual">
+                <div class="why-us-visual" data-reveal="zoom">
                     <div class="stacked-card">🔧<span>Profizmus</span></div>
                     <div class="stacked-card">🏆<span>Minőség</span></div>
                     <div class="stacked-card">🛡️<span>Biztonság</span></div>
                 </div>
-                <h2>MIÉRT MINKET VÁLASSZ?</h2>
-                <p>A MASZEK garanciát jelent a gyors és megbízható ügyintézésre mindkét fél számára.</p>
-                <ul class="checklist">
+                <h2 data-reveal="left">MIÉRT MINKET VÁLASSZ?</h2>
+                <p data-reveal="left">A MASZEK garanciát jelent a gyors és megbízható ügyintézésre mindkét fél számára.</p>
+                <ul class="checklist" data-stagger="left">
                     <li><span class="check-icon">✓</span> Ellenőrzött mesterek és vállalkozások</li>
                     <li><span class="check-icon">✓</span> Átlátható felület és részletes profilok</li>
                     <li><span class="check-icon">✓</span> Széles választék a környéked szakembereiből</li>
                 </ul>
             </div>
             <div class="process-content">
-                <h2>HOGYAN MŰKÖDIK A MASZEK?</h2>
-                <div class="role-toggle-wrap">
+                <h2 data-reveal="right">HOGYAN MŰKÖDIK A MASZEK?</h2>
+                <div class="role-toggle-wrap" data-reveal="right">
                     <button class="role-btn active" onclick="switchRole('user')">Megrendelőként</button>
                     <button class="role-btn" onclick="switchRole('master')">Mesterként</button>
                 </div>
-                <div class="process-steps role-view active" id="view-user">
+                <div class="process-steps role-view active" id="view-user" data-stagger="right">
                 <div class="process-step">
                     <div class="step-number">1</div>
                     <div class="step-text">
@@ -184,7 +219,7 @@
                     </div>
                 </div>
             </div>
-            <div class="process-steps role-view" id="view-master">
+            <div class="process-steps role-view" id="view-master" data-stagger="right">
                 <div class="process-step">
                     <div class="step-number">1</div>
                     <div class="step-text">
@@ -212,7 +247,7 @@
     </section>
     <section class="calculator-section" id="kalkulator">
         <div class="wrap">
-            <div class="calc-card">
+            <div class="calc-card" data-reveal="zoom">
                 <h3>💡 GYORS ÁRBECSLŐ KALKULÁTOR</h3>
                 <p style="color:var(--teal-light); font-size:14px; margin-bottom:20px;">Próbáld ki, körülbelül milyen munkadíjra számíthatsz!</p>
                 <div class="calc-grid">
@@ -225,7 +260,7 @@
                         </select>
                     </div>
                     <div class="calc-field">
-                        <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px; color:#FFF;">Mennyiség (db / m²):</label>
+                        <label id="calcUnitLabel" style="font-size:12px; font-weight:700; display:block; margin-bottom:4px; color:#FFF;">Mennyiség (db / m²):</label>
                         <input type="number" id="calcAmount" value="10" min="1" oninput="updateCalc()">
                     </div>
                 </div>
@@ -237,16 +272,81 @@
     </section>
     <section class="about-section" id="rolunk">
         <div class="wrap about-content">
-            <h2>RÓLUNK</h2>
-            <p>A MASZEK küldetése,hogy modern, átlátható és megbízható platformot biztosítson a hazai szakemberek és lakossági megrendelők számára. Elkötelezettek vagyunk a minőségi munkavégzés és a tiszta kommunikáció mellett.</p>
-            <div class="stats-row">
+            <h2 data-reveal>RÓLUNK</h2>
+            <p data-reveal>A MASZEK küldetése,hogy modern, átlátható és megbízható platformot biztosítson a hazai szakemberek és lakossági megrendelők számára. Elkötelezettek vagyunk a minőségi munkavégzés és a tiszta kommunikáció mellett.</p>
+            <div class="stats-row" data-stagger="zoom">
                 <div class="stat-item"><b>120+</b><span>AKTÍV MESTER</span></div>
                 <div class="stat-item"><b>4.9 ★</b><span>ÁTLAGOS ÉRTÉKELÉS</span></div>
                 <div class="stat-item"><b>500+</b><span>ELVÉGZETT MUNKA</span></div>
             </div>
-            <button class="btn btn-primary" onclick="openModal('register')">TUDJ MEG TÖBBET</button>
+            <button class="btn btn-primary" type="button" data-reveal onclick="openModal('about')" aria-haspopup="dialog" aria-controls="modal-about">TUDJ MEG TÖBBET</button>
         </div>
     </section>
+    <footer id="kapcsolat">
+        <div class="wrap">
+            <h2 data-reveal>LÉPJ KAPCSOLATBA</h2>
+            <p data-reveal>Iratkozz fel értesítéseinkre vagy regisztrálj még ma a platformunkra!</p>
+            <form class="footer-form" data-reveal>
+                <input type="email" placeholder="E-mail címed" required>
+                <button type="submit" class="btn btn-primary">KÜLDÉS</button>
+            </form>
+            <div class="footer-bottom" data-reveal>
+                © 2026 MASZEK. Minden jog fenntartva.
+            </div>
+         </div>
+    </footer>
+    <div class="modal" id="modal-about" role="dialog" aria-modal="true" aria-labelledby="modal-about-title" hidden>
+        <div class="modal-dialog">
+            <button class="modal-close" type="button" data-close aria-label="Bezárás">✕</button>
+
+            <span class="modal-eyebrow" data-m style="--m:0">Magyar Szakember Kereső</span>
+            <h2 id="modal-about-title" data-m style="--m:1">MI IS AZ A MASZEK?</h2>
+            <p class="modal-lead" data-m style="--m:2">
+                Egy helyre hozzuk a magyar szakembereket, mestereket, magántanárokat és induló kisvállalkozásokat.
+                Néhány kattintással megtalálhatod a számodra megfelelőt – akár térképen is –, a munkakérelem,
+                az ajánlatadás és a foglalás pedig könnyen és problémamentesen zajlik.
+            </p>
+
+            <h3 class="modal-section-title" data-m style="--m:3">Miben vagyunk mások?</h3>
+            <div class="modal-grid">
+                <div class="modal-item" data-m style="--m:4">
+                    <div class="modal-icon">🗺️</div>
+                    <div><h4>Térképes keresés</h4><p>Földrajzi helyzet alapján találd meg a megyédben vagy a környékeden dolgozó specialistákat.</p></div>
+                </div>
+                <div class="modal-item" data-m style="--m:5">
+                    <div class="modal-icon">💬</div>
+                    <div><h4>Szöveges értékelések</h4><p>Nem csak csillagok: a korábbi megrendelők részletes véleményét is elolvashatod.</p></div>
+                </div>
+                <div class="modal-item" data-m style="--m:6">
+                    <div class="modal-icon">🧰</div>
+                    <div><h4>Sokféle szakma</h4><p>Burkolók, villanyszerelők és kőművesek mellett magántanárok, kisebb vállalkozások is helyet kapnak.</p></div>
+                </div>
+                <div class="modal-item" data-m style="--m:7">
+                    <div class="modal-icon">👛</div>
+                    <div><h4>Virtuális tárca</h4><p>Nem a helyszínen kell a fizetéssel bajlódni, az könnyedén a weboldalon is megtörténhet.</p></div>
+                </div>
+                <div class="modal-item" data-m style="--m:8">
+                    <div class="modal-icon">📅</div>
+                    <div><h4>Naptár a mestereknek</h4><p>Az elvállalt munkák egy átlátható felületen, naptárban rendszerezhetők.</p></div>
+                </div>
+                <div class="modal-item" data-m style="--m:9">
+                    <div class="modal-icon">🛡️</div>
+                    <div><h4>Admin felügyelet</h4><p>Egy admin felület köti össze a két oldalt, és az egész platform biztonságát kezeli.</p></div>
+                </div>
+            </div>
+
+            <div class="modal-note" data-m style="--m:10">
+                <strong>Átlátható díjazás.</strong>
+                A mesterek kevés díj fejében hirdethetik magukat: az elvégzett munka végösszegéből egy kisebb rész az oldal
+                fenntartására megy, a hirdetés pedig a megjelenéstől számított hatodik hónaptól díjköteles.
+            </div>
+            <div class="modal-actions" data-m style="--m:13">
+                <button class="btn btn-primary" type="button" data-close data-goto="#kapcsolat">Lépj kapcsolatba</button>
+                <button class="btn btn-ghost" type="button" data-close>Bezárás</button>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/script/script.js"></script>
 </body>
 </html>

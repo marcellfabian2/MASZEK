@@ -313,8 +313,11 @@ function updateCalc() {
     { i: '🚛', n: 'FUVAROZÁS', s: 'Fuvarozás', c: 21, p: 500, u: 'km',
       d: 'Kisteherautós és teherautós szállítás, építőanyag- és bútorfuvarozás országszerte.' }
   ];
-  const PER_PAGE = 3;
-  const ROTATE_MS = 60000;
+  const mqMobile = window.matchMedia('(max-width: 640px)');
+  const mqTablet = window.matchMedia('(min-width: 641px) and (max-width: 1024px)');
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  function perPage() { return mqMobile.matches ? 1 : (mqTablet.matches ? 2 : 3); }
+  function rotateMs() { return mqMobile.matches ? 8000 : 20000; }   // mobilon 8 mp
 
   function escapeHtml(str) {
     return String(str).replace(/[&<>"]/g, function (ch) {
@@ -333,31 +336,35 @@ function updateCalc() {
 
   const servicesGrid = doc.getElementById('servicesGrid');
   if (servicesGrid) {
-    const pages = Math.ceil(TRADES.length / PER_PAGE);
-    let current = 0;
-    let swapping = false;
-    let elapsed = 0;
-    let hovered = false;
-    let inView = false;
-    let maxHeight = 0;
+    let pp = perPage();
+    let pages = Math.ceil(TRADES.length / pp);
+    let current = 0, swapping = false, elapsed = 0, hovered = false, inView = false, maxHeight = 0;
+    let dots = [];
 
-    // lapozó pontok
     const pager = doc.createElement('div');
     pager.className = 'services-pager';
     pager.setAttribute('role', 'group');
     pager.setAttribute('aria-label', 'Szakmák oldalai');
-    const dots = [];
-    for (let p = 0; p < pages; p++) {
-      const dot = doc.createElement('button');
-      dot.type = 'button';
-      dot.className = 'pager-dot';
-      dot.setAttribute('aria-label', (p + 1) + '. oldal');
-      dot.innerHTML = '<i></i>';
-      dot.addEventListener('click', function () { goTo(p); });
-      pager.appendChild(dot);
-      dots.push(dot);
-    }
+    const count = doc.createElement('span');
+    count.className = 'pager-count';
     servicesGrid.insertAdjacentElement('afterend', pager);
+
+    function buildPager() {
+      pager.innerHTML = '';
+      dots = [];
+      pager.classList.toggle('is-compact', mqMobile.matches);
+      for (let p = 0; p < pages; p++) {
+        const dot = doc.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pager-dot';
+        dot.setAttribute('aria-label', (p + 1) + '. oldal');
+        dot.innerHTML = '<i></i>';
+        dot.addEventListener('click', function () { goTo(p); });
+        pager.appendChild(dot);
+        dots.push(dot);
+      }
+      pager.appendChild(count);
+    }
 
     function markActive() {
       dots.forEach(function (d, k) {
@@ -365,6 +372,7 @@ function updateCalc() {
         d.setAttribute('aria-current', k === current ? 'true' : 'false');
         d.firstChild.style.transform = 'scaleX(0)';
       });
+      count.textContent = (current + 1) + ' / ' + pages;
     }
 
     function holdHeight() {
@@ -372,58 +380,148 @@ function updateCalc() {
       if (h > maxHeight) { maxHeight = h; servicesGrid.style.minHeight = maxHeight + 'px'; }
     }
 
-    function goTo(page) {
+    function renderPage(page, cls) {
+      servicesGrid.innerHTML = '';
+      TRADES.slice(page * pp, page * pp + pp).forEach(function (t, k) {
+        const card = doc.createElement('div');
+        card.className = 'service-card' + (cls ? ' ' + cls : '');
+        card.style.setProperty('--sd', (k * 0.12) + 's');
+        card.innerHTML = cardHtml(t);
+        servicesGrid.appendChild(card);
+      });
+    }
+
+    function isSlide() { return mqMobile.matches || mqTablet.matches; }
+    function slideTo(page, dir, fromX, fromOpacity) {
       if (swapping || page === current) return;
       swapping = true;
       elapsed = 0;
       holdHeight();
+      const w = servicesGrid.offsetWidth;
+      const dur = reduceMotion ? 0 : 240;
+      const op0 = (fromOpacity === undefined || fromOpacity === '') ? 1 : parseFloat(fromOpacity);
+      const out = servicesGrid.animate([
+        { transform: 'translateX(' + (fromX || 0) + 'px)', opacity: op0 },
+        { transform: 'translateX(' + (-dir * w * 0.5) + 'px)', opacity: 0 }
+      ], { duration: dur, easing: 'ease-in', fill: 'forwards' });
+      servicesGrid.style.transform = '';
+      servicesGrid.style.opacity = '';
+      out.onfinish = function () {
+        current = page;
+        renderPage(page);
+        holdHeight();
+        markActive();
+        const inn = servicesGrid.animate([
+          { transform: 'translateX(' + (dir * w * 0.5) + 'px)', opacity: 0 },
+          { transform: 'translateX(0)', opacity: 1 }
+        ], { duration: dur * 1.2, easing: 'ease-out' });
+        out.cancel();
+        inn.onfinish = function () { swapping = false; };
+      };
+    }
 
-      const oldCards = Array.from(servicesGrid.children);
-      oldCards.forEach(function (card, k) {
+    function goTo(page, dir) {
+      if (swapping || page === current) return;
+      if (isSlide()) { slideTo(page, dir || (page > current ? 1 : -1), 0); return; }
+      swapping = true;
+      elapsed = 0;
+      holdHeight();
+      Array.from(servicesGrid.children).forEach(function (card, k) {
         card.removeAttribute('data-reveal');
         card.style.setProperty('--sd', (k * 0.1) + 's');
         card.classList.add('swap-out');
       });
-
-      const outTime = reduceMotion ? 0 : 750;
       setTimeout(function () {
         current = page;
-        servicesGrid.innerHTML = '';
-        TRADES.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE).forEach(function (t, k) {
-          const card = doc.createElement('div');
-          card.className = 'service-card swap-in';
-          card.style.setProperty('--sd', (k * 0.12) + 's');
-          card.innerHTML = cardHtml(t);
-          servicesGrid.appendChild(card);
-        });
+        renderPage(page, 'swap-in');
         holdHeight();
         markActive();
         setTimeout(function () { swapping = false; }, reduceMotion ? 0 : 1000);
-      }, outTime);
+      }, reduceMotion ? 0 : 750);
     }
+    function relayout() {
+      pp = perPage();
+      pages = Math.ceil(TRADES.length / pp);
+      current = 0; elapsed = 0; maxHeight = 0; swapping = false;
+      servicesGrid.style.minHeight = '';
+      renderPage(0);
+      buildPager();
+      markActive();
+      holdHeight();
+    }
+    mqMobile.addEventListener('change', relayout);
+    mqTablet.addEventListener('change', relayout);
+
+    if (pp !== 3) renderPage(0);
+    buildPager();
     markActive();
+
+    let drag = null, justDragged = false;
+    servicesGrid.addEventListener('pointerdown', function (e) {
+      if (!isSlide() || swapping || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      drag = { x: e.clientX, y: e.clientY, dx: 0, active: false };
+    });
+    servicesGrid.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.active) {
+        if (Math.abs(dx) < 10 || Math.abs(dx) < Math.abs(dy)) return;
+        drag.active = true;
+        try { servicesGrid.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+      drag.dx = dx;
+      servicesGrid.style.transform = 'translateX(' + dx + 'px)';
+      servicesGrid.style.opacity = String(1 - Math.min(Math.abs(dx) / servicesGrid.offsetWidth, 0.6));
+    });
+    function endDrag() {
+      if (!drag) return;
+      const d = drag;
+      drag = null;
+      if (!d.active) return;
+      justDragged = true;
+      setTimeout(function () { justDragged = false; }, 60);
+      if (Math.abs(d.dx) > Math.min(80, servicesGrid.offsetWidth * 0.2) && pages > 1) {
+        const dir = d.dx < 0 ? 1 : -1;
+        slideTo((current + dir + pages) % pages, dir, d.dx, servicesGrid.style.opacity);
+      } else {
+        servicesGrid.style.transition = 'transform .25s ease, opacity .25s ease';
+        servicesGrid.style.transform = '';
+        servicesGrid.style.opacity = '';
+        setTimeout(function () { servicesGrid.style.transition = ''; }, 260);
+      }
+    }
+    servicesGrid.addEventListener('pointerup', endDrag);
+    servicesGrid.addEventListener('pointercancel', endDrag);
+    servicesGrid.addEventListener('click', function (e) {
+      if (justDragged) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
     new IntersectionObserver(function (entries) {
       inView = entries[0].isIntersecting;
       if (inView) holdHeight();
     }, { threshold: 0.35 }).observe(servicesGrid);
 
-    ['mouseenter', 'focusin'].forEach(function (ev) {
-      servicesGrid.addEventListener(ev, function () { hovered = true; });
-      pager.addEventListener(ev, function () { hovered = true; });
-    });
-    ['mouseleave', 'focusout'].forEach(function (ev) {
-      servicesGrid.addEventListener(ev, function () { hovered = false; });
-      pager.addEventListener(ev, function () { hovered = false; });
-    });
+    if (canHover) {
+      ['mouseenter', 'focusin'].forEach(function (ev) {
+        servicesGrid.addEventListener(ev, function () { hovered = true; });
+        pager.addEventListener(ev, function () { hovered = true; });
+      });
+      ['mouseleave', 'focusout'].forEach(function (ev) {
+        servicesGrid.addEventListener(ev, function () { hovered = false; });
+        pager.addEventListener(ev, function () { hovered = false; });
+      });
+    }
+
     let last = performance.now();
     (function tick(now) {
       const dt = Math.min(now - last, 100);
       last = now;
-      if (inView && !hovered && !swapping && !doc.hidden && !doc.querySelector('.modal:not([hidden])')) {
+      if (inView && !hovered && !drag && !swapping && !doc.hidden && !doc.querySelector('.modal:not([hidden])')) {
         elapsed += dt;
         const fill = dots[current] && dots[current].firstChild;
-        if (fill) fill.style.transform = 'scaleX(' + Math.min(elapsed / ROTATE_MS, 1) + ')';
-        if (elapsed >= ROTATE_MS) goTo((current + 1) % pages);
+        const ms = rotateMs();
+        if (fill) fill.style.transform = 'scaleX(' + Math.min(elapsed / ms, 1) + ')';
+        if (elapsed >= ms) goTo((current + 1) % pages, 1);
       }
       requestAnimationFrame(tick);
     })(last);

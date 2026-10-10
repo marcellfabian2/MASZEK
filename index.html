@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>MASZEK</title>
     <link rel="icon" type="image/png" href="assets/image/maszek_logo.svg">
     <script>
@@ -43,23 +43,47 @@
         </button>
     </div>
     <header class="topbar">
-        <div class="wrap">
-            <div class="brand">
-                <div class="brand-mark"><img style="width: 200px;" src="assets/image/maszek_fullLogo.png"></div>
-            </div>
-            <nav class="nav-links">
-                <a href="#szolgaltatasok">Szolgáltatások</a>
-                <a href="#funkciok">Funkciók</a>
-                <a href="#folyamat">Folyamat</a>
-                <a href="#kalkulator">Árkalkulátor</a>
-                <a href="#rolunk">Rólunk</a>
-            </nav>
-            <div class="auth-btns">
-                <button class="btn btn-outline">Bejelentkezés</button>
-                <button class="btn btn-primary">Regisztráció</button>
-            </div>
+    <div class="wrap">
+        <div class="brand">
+            <a href="#" class="brand-mark" aria-label="MASZEK Főoldal">
+                <img class="logo-full" src="assets/image/maszek_fullLogo.png" alt="MASZEK Főoldal">
+                <img class="logo-mark" src="assets/image/maszek_logo.svg" alt="">
+            </a>
         </div>
-    </header>
+        <nav class="nav-links" aria-label="Fő navigáció">
+            <a href="#szolgaltatasok" aria-label="Szolgáltatások">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                <span class="nav-label">Szolgáltatások</span>
+            </a>
+            <a href="#funkciok" aria-label="Funkciók">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5l-5.4 3 1.2-6L3.3 9.3l6.1-.7z"/></svg>
+                <span class="nav-label">Funkciók</span>
+            </a>
+            <a href="#folyamat" aria-label="Folyamat">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>
+                <span class="nav-label">Folyamat</span>
+            </a>
+            <a href="#kalkulator" aria-label="Árkalkulátor">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg>
+                <span class="nav-label">Árkalkulátor</span>
+            </a>
+            <a href="#rolunk" aria-label="Rólunk">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                <span class="nav-label">Rólunk</span>
+            </a>
+        </nav>
+        <div class="auth-btns">
+            <button class="btn btn-outline" aria-label="Bejelentkezés">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                <span class="btn-label">Bejelentkezés</span>
+            </button>
+            <button class="btn btn-primary" aria-label="Regisztráció">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M19 8v6M16 11h6"/></svg>
+                <span class="btn-label">Regisztráció</span>
+            </button>
+        </div>
+    </div>
+</header>
     <section class="hero" id="hero">
         <div class="wrap">
             <h1>SZAKEMBER KERESŐ <span>PLATFORM</span></h1>

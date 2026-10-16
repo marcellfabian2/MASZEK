@@ -560,3 +560,25 @@ function updateCalc() {
     if (calcAmount) calcAmount.addEventListener('input', pulseResult);
   }
 })();
+
+/*Alex*/
+const services = document.getElementById("servicesGrid");
+
+services.addEventListener("mousemove", function(event) {
+
+    const card = event.target.closest(".service-card");
+
+    if (card) {
+        const rect = card.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        card.style.setProperty("--x", x + "px");
+        card.style.setProperty("--y", y + "px");
+    }
+
+});
+/*Alex*/
+card.style.setProperty("--x", x + "px");
+card.style.setProperty("--y", y + "px");

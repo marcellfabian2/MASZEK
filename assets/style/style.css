@@ -272,7 +272,7 @@ button, input, select{
     margin: 0 auto 36px;
     line-height: 1.6;
 }
-
+/*Alex*/
 .hero-search-wrap{
     max-width: 720px;
     margin: 0 auto 40px;
@@ -282,6 +282,18 @@ button, input, select{
     display: flex;
     gap: 8px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease;
+}
+
+/*Alex*/
+.hero-search-wrap:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.35), 0 0 25px rgba(216, 90, 48, 0.4);
+}
+
+/*Alex*/
+.hero-search-wrap:focus-within .search-input span {
+    transform: scale(1.2) rotate(-12deg);
 }
 
 .search-input{
@@ -302,6 +314,12 @@ button, input, select{
     font-size: 15px;
     color: var(--ink-primary);
     outline: none;
+}
+
+/*Alex*/
+.search-input span {
+    display: inline-block;
+    transition: 0.3s ease;
 }
 
 .platform-preview-grid{
@@ -383,9 +401,10 @@ button, input, select{
     gap: 28px;
 }
 
+/*Alex*/
 .service-card{
     background: var(--bg-light);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
     border-radius: 16px;
     padding: 24px;
     text-align: center;
@@ -395,10 +414,14 @@ button, input, select{
     justify-content: space-between;
 }
 
+/*Alex*/
 .service-card:hover{
     transform: translateY(-6px);
-    border-color: var(--terrakotta-base);
+    border-color: transparent;
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+    background: radial-gradient(circle 180px at var(--x, -300px) var(--y, -300px), rgba(216, 90, 48, 0.20), transparent 80%) padding-box, linear-gradient(var(--bg-light), var(--bg-light)) padding-box, linear-gradient(90deg, #D85A30, #1D9E75, #D85A30) border-box;
+    background-size: 100% 100%, 100% 100%, 200% 100%;
+    animation: movingBorder 3s linear infinite;
 }
 
 .service-img-placeholder{
@@ -1488,6 +1511,18 @@ html.is-covered .preview-card{
         scale: 1;
     }
 }
+
+/*Alex*/
+@keyframes movingBorder {
+    from {
+        background-position: 0 0, 0 0, 0% 50%;
+    }
+
+    to {
+        background-position: 0 0, 0 0, 100% 50%;
+    }
+}
+
 
 /* --- Media Queries --- */
 @media (max-width: 1024px){

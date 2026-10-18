@@ -1,7 +1,8 @@
 (function () {
   'use strict';
-  const MIN_AGE = 18;                      
-  const REDIRECT_URL = '';                 
+
+  const MIN_AGE = 18;
+  const REDIRECT_URL = '';
   const STORAGE_KEY = 'maszek_felhasznalok';
   const NOTE_MAX = 200;
 
@@ -26,7 +27,7 @@
   }
   function saveUsers(list) {
     memoryUsers = list;
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) { /* privát mód */ }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {  }
   }
   function findUser(name) {
     const n = String(name).trim().toLowerCase();
@@ -61,10 +62,10 @@
     return dp[a.length][b.length];
   }
 
-  const TITLE_RE = /^(dr|prof|ifj|id|özv|néhai)\.?$/i;               
+  const TITLE_RE = /^(dr|prof|ifj|id|özv|néhai)\.?$/i;
   const PARTICLES = ['von', 'van', 'de', 'di', 'da', 'del', 'der', 'den', 'la', 'le', 'du', 'zu', 'af', 'al', 'el', 'bin', 'ibn', 'ben', 'dos', 'das'];
-  const NAME_WORD_RE = /^\p{Lu}\p{Ll}*(?:[-']\p{Lu}\p{Ll}*)*$/u;       
-  const INITIAL_RE = /^\p{Lu}\.$/u;                                      
+  const NAME_WORD_RE = /^\p{Lu}\p{Ll}*(?:[-']\p{Lu}\p{Ll}*)*$/u;
+  const INITIAL_RE = /^\p{Lu}\.$/u;
 
   function checkFullName(v) {
     if (!v) return 'Add meg a teljes neved.';
@@ -74,7 +75,7 @@
     if (/(.)\1{3,}/iu.test(v)) return 'Ez nem tűnik valódi névnek – ellenőrizd az írásmódot.';
     const tokens = v.split(' ').filter(Boolean);
     let i = 0;
-    while (i < tokens.length - 1 && TITLE_RE.test(tokens[i])) i++;     
+    while (i < tokens.length - 1 && TITLE_RE.test(tokens[i])) i++;
     const words = tokens.slice(i);
     const real = words.filter(function (w) { return !INITIAL_RE.test(w) && PARTICLES.indexOf(w) === -1; });
     if (real.length < 2) return 'Add meg a vezeték- és a keresztneved is (pl. Kovács Péter).';
@@ -161,7 +162,6 @@
     return '';
   }
 
-  // e-mail
   const EMAIL_LOCAL_RE = /^[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+\/=?^_`{|}~-]+)*$/;
   const DOMAIN_LABEL_RE = /^[\p{L}\p{N}](?:[\p{L}\p{N}-]*[\p{L}\p{N}])?$/u;
   const KNOWN_DOMAINS = ['gmail.com', 'freemail.hu', 'citromail.hu', 't-online.hu', 'hotmail.com', 'outlook.com', 'outlook.hu',
@@ -308,7 +308,7 @@
 
     input.addEventListener('input', function () {
       f.dirty = true;
-      if (opts.touchOnInput) f.touched = true; 
+      if (opts.touchOnInput) f.touched = true;
       if (f.format) f.format(f, 'input');
       update(f, false);
       if (opts.onInput) opts.onInput(f);
@@ -324,9 +324,9 @@
 
   function titleCaseName(v) {
     if (!v) return v;
-    if (v !== v.toLowerCase() && v !== v.toUpperCase()) return v;  
+    if (v !== v.toLowerCase() && v !== v.toUpperCase()) return v;
     return v.toLowerCase().split(' ').map(function (w, i) {
-      if (i > 0 && PARTICLES.indexOf(w) !== -1) return w;            
+      if (i > 0 && PARTICLES.indexOf(w) !== -1) return w;
       return w.replace(/(^|[-'])(\p{Ll})/gu, function (m, sep, ch) { return sep + ch.toUpperCase(); });
     }).join(' ');
   }
@@ -343,7 +343,7 @@
     if (when === 'input') {
       const el = f.input, pos = el.selectionStart, before = el.value;
       const cleaned = before.replace(/\s+/g, '');
-      if (cleaned !== before) { el.value = cleaned; try { el.setSelectionRange(pos - 1, pos - 1); } catch (e) { /* nem támogatott */ } }
+      if (cleaned !== before) { el.value = cleaned; try { el.setSelectionRange(pos - 1, pos - 1); } catch (e) {  } }
     }
   }
   function emailFormat(f, when) {
@@ -358,7 +358,7 @@
     const plus = raw.trim().charAt(0) === '+';
     let d = raw.replace(/\D/g, '');
     if (plus) {
-      if (d.length <= 2 && '36'.indexOf(d) === 0) return '+' + d;   
+      if (d.length <= 2 && '36'.indexOf(d) === 0) return '+' + d;
       if (d.indexOf('36') === 0) d = d.slice(2);
     } else if (d.indexOf('0036') === 0) {
       d = d.slice(4);
@@ -366,7 +366,7 @@
       d = d.slice(2);
     } else if (d === '0' || d === '00' || d === '003') {
       return d;
-    } else if (d.indexOf('36') === 0 && d.length >= 10) {           
+    } else if (d.indexOf('36') === 0 && d.length >= 10) {
       d = d.slice(2);
     }
     d = d.slice(0, nationalLength(d));
@@ -380,7 +380,7 @@
   function phoneFormat(f, when) {
     const el = f.input;
     if (!el.value) return;
-    if (when === 'input' && el.selectionStart !== el.value.length) return; 
+    if (when === 'input' && el.selectionStart !== el.value.length) return;
     const formatted = formatPhone(el.value);
     if (formatted !== el.value) el.value = formatted;
     if (when === 'blur') el.value = el.value.trim();
@@ -432,7 +432,7 @@
   function placePwPop() {
     const pop = $('#pw-panel');
     const ctl = $('.control', pwField.wrap).getBoundingClientRect();
-    const limit = actions.getBoundingClientRect().top - 8;     
+    const limit = actions.getBoundingClientRect().top - 8;
     const room = limit - (ctl.bottom + 9);
     pwField.wrap.classList.toggle('pw-up', pop.offsetHeight > room);
   }
@@ -467,7 +467,7 @@
       if (count <= 1) level = 1;
       else if (count < 4) level = 2;
       else level = v.length >= 12 ? 4 : 3;
-      if (pwIssue(v)) level = Math.min(level, 1);                       
+      if (pwIssue(v)) level = Math.min(level, 1);
     }
     $('#meter').dataset.level = level;
     $('#meter-label').textContent = LEVEL_LABELS[level];
@@ -479,6 +479,9 @@
     const iso = function (d) { return d.toISOString().slice(0, 10); };
     el.max = iso(t);
     el.min = iso(new Date(t.getFullYear() - 120, t.getMonth(), t.getDate()));
+    const mark = function () { el.classList.toggle('has-value', !!el.value); };
+    ['input', 'change', 'blur'].forEach(function (ev) { el.addEventListener(ev, mark); });
+    mark();
   })();
 
   $$('.eye').forEach(function (btn) {
@@ -490,7 +493,7 @@
       btn.setAttribute('aria-label', show ? 'Jelszó elrejtése' : 'Jelszó megjelenítése');
       input.focus({ preventScroll: true });
       const len = input.value.length;
-      try { input.setSelectionRange(len, len); } catch (e) { /* nem támogatott */ }
+      try { input.setSelectionRange(len, len); } catch (e) {  }
     });
   });
 
@@ -537,7 +540,7 @@
   };
   const TOTAL = 4;
   let step = 1;
-  let regTipus = '';         
+  let regTipus = '';
 
   function stepFields(n) {
     return STEP_FIELDS[n];
@@ -716,18 +719,17 @@
     }
 
     const szemely = {
-      reg_tipus: regTipus,              
-      telj_nev: val('teljnev'),        
-      email: val('email'),             
-      szul_datum: val('szuldatum'),     
-      reg_datum: todayISO(),             
-      telszam: val('tel'),             
-      lakcim: val('lakcim'),            
-      megjegyzes: val('megjegyzes'),     
-      f_nev: val('felhasznalonev'),     
-      jelszo: val('jelszo')              
+      reg_tipus: regTipus,
+      telj_nev: val('teljnev'),
+      email: val('email'),
+      szul_datum: val('szuldatum'),
+      reg_datum: todayISO(),
+      telszam: val('tel'),
+      lakcim: val('lakcim'),
+      megjegyzes: val('megjegyzes'),
+      f_nev: val('felhasznalonev'),
+      jelszo: val('jelszo')
     };
-
     const users = loadUsers().slice();
     users.push(szemely);
     saveUsers(users);
@@ -833,7 +835,7 @@
   async function finishLogin(user) {
     loginBtn.classList.add('is-done');
     await wait(1100);
-    if (!REDIRECT_URL) return;   
+    if (!REDIRECT_URL) return;
     if (window.maszekGo) window.maszekGo(REDIRECT_URL);
     else window.location.href = REDIRECT_URL;
   }
@@ -899,7 +901,7 @@
     });
     doc.title = (mode === 'register' ? 'Regisztráció' : 'Bejelentkezés') + ' – MASZEK';
     if (opts.history !== false) {
-      try { history.replaceState(null, '', mode === 'register' ? '#regisztracio' : '#belepes'); } catch (e) { /* file:// */ }
+      try { history.replaceState(null, '', mode === 'register' ? '#regisztracio' : '#belepes'); } catch (e) {  }
     }
     if (opts.focus !== false && canHover && mode === 'login') {
       setTimeout(function () {

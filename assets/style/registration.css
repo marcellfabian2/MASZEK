@@ -129,8 +129,8 @@ button, input, textarea{ font-family: inherit; }
     overflow: hidden;
     overflow: clip;
     isolation: isolate;
-    --vd: 0.55s;   
-    --pd: 0.55s;  
+    --vd: 0.55s;
+    --pd: 0.55s;
     animation: shellIn 1s var(--ease-out) backwards;
 }
 .shell.is-booting{
@@ -559,7 +559,7 @@ button, input, textarea{ font-family: inherit; }
 }
 .field.pw-up .pw-pop{
     top: auto;
-    bottom: calc(100% + 30px); 
+    bottom: calc(100% + 30px);
     transform-origin: bottom center;
     translate: 0 8px;
 }
@@ -747,7 +747,6 @@ button, input, textarea{ font-family: inherit; }
 .stepper li.is-done .dot svg{ opacity: 1; scale: 1; }
 .stepper li.is-done .lbl{ color: var(--teal-dark); }
 
-/* lépések */
 .steps{
     display: grid;
     align-items: start;
@@ -1579,7 +1578,6 @@ button, input, textarea{ font-family: inherit; }
         margin-top: auto;
         padding-top: 12px;
     }
-
     .reg-flow[data-step="1"] .steps{
         flex: 1;
         height: auto !important;
@@ -1676,6 +1674,54 @@ button, input, textarea{ font-family: inherit; }
     display: none;
 }
 #view-register .view-body > .success:not([hidden]){
-    flex: 1;
-    min-height: 0;
+    flex: 0 0 auto;
+    margin-block: auto;
+}
+
+@media (max-height: 640px){
+    .success{
+        gap: 4px;
+        padding: 0;
+    }
+    .success-mark{
+        width: 60px;
+        height: 60px;
+        padding: 8px;
+        margin-bottom: 0;
+    }
+    .success h2{
+        font-size: 20px;
+    }
+    .success p{
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    .sum{
+        margin-bottom: 4px;
+    }
+}
+
+.control input[type="date"]{
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
+    text-align: left;
+}
+.control input[type="date"]::-webkit-date-and-time-value{
+    text-align: left;
+    margin: 0;
+    min-height: 1.4em;
+}
+.control input[type="date"]::-webkit-datetime-edit{
+    padding: 0;
+}
+.control input[type="date"]::-webkit-datetime-edit-fields-wrapper{
+    padding: 0;
+}
+@supports (-webkit-touch-callout: none){
+    .control input[type="date"]:not(.has-value)::before{
+        content: "ÉÉÉÉ. HH. NN.";
+        color: #A9A79E;
+        font-weight: 400;
+    }
 }

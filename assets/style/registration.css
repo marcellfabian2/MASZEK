@@ -1459,7 +1459,7 @@ button, input, textarea{ font-family: inherit; }
     :root{ --panel-radius: 110px; }
 }
 
-@media (max-width: 900px), (max-height: 520px){
+@media (max-width: 900px), (max-height: 520px) and (max-width: 960px){
     body{ padding: 14px; place-items: start center; }
     .shell{
         height: min(880px, calc(100dvh - 28px));
@@ -1527,7 +1527,7 @@ button, input, textarea{ font-family: inherit; }
     .toast{ top: 10px; }
 }
 
-@media (max-height: 520px){
+@media (max-height: 520px) and (max-width: 960px){
     .panel{ display: none; }
     .shell{ height: calc(100dvh - 20px); border-radius: 18px; }
     body{ padding: 10px; }
@@ -1555,7 +1555,7 @@ button, input, textarea{ font-family: inherit; }
     .success-mark{ width: 56px; height: 56px; }
 }
 
-@media (max-width: 900px), (max-height: 520px){
+@media (max-width: 900px), (max-height: 520px) and (max-width: 960px){
     #view-register .view-body{
         margin-block: 0;
         flex: 1;
@@ -1702,7 +1702,8 @@ button, input, textarea{ font-family: inherit; }
 }
 
 .control input[type="date"]{
-    display: block;
+    display: flex;
+    align-items: center;
     -webkit-appearance: none;
     appearance: none;
     text-align: left;
@@ -1710,7 +1711,6 @@ button, input, textarea{ font-family: inherit; }
 .control input[type="date"]::-webkit-date-and-time-value{
     text-align: left;
     margin: 0;
-    min-height: 1.4em;
 }
 .control input[type="date"]::-webkit-datetime-edit{
     padding: 0;

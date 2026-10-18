@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Marcellus&display=swap');
+
 *{
     padding: 0;
     margin: 0;
@@ -126,10 +127,10 @@ button, input, textarea{ font-family: inherit; }
     border-radius: 28px;
     box-shadow: 0 30px 80px rgba(74, 27, 12, 0.18), 0 2px 6px rgba(74, 27, 12, 0.06);
     overflow: hidden;
-    overflow: clip;  
+    overflow: clip;
     isolation: isolate;
-    --vd: 0.55s;  
-    --pd: 0.55s;   
+    --vd: 0.55s;   
+    --pd: 0.55s;  
     animation: shellIn 1s var(--ease-out) backwards;
 }
 .shell.is-booting{
@@ -556,10 +557,9 @@ button, input, textarea{ font-family: inherit; }
     pointer-events: auto;
     transition-delay: 0s;
 }
-
 .field.pw-up .pw-pop{
     top: auto;
-    bottom: calc(100% + 30px);  
+    bottom: calc(100% + 30px); 
     transform-origin: bottom center;
     translate: 0 8px;
 }
@@ -1579,6 +1579,7 @@ button, input, textarea{ font-family: inherit; }
         margin-top: auto;
         padding-top: 12px;
     }
+
     .reg-flow[data-step="1"] .steps{
         flex: 1;
         height: auto !important;
@@ -1670,4 +1671,11 @@ button, input, textarea{ font-family: inherit; }
 .shell.no-trans .panel-copy,
 .shell.no-trans .rise-p{
     transition: none !important;
+}
+#view-register .reg-flow[hidden]{
+    display: none;
+}
+#view-register .view-body > .success:not([hidden]){
+    flex: 1;
+    min-height: 0;
 }

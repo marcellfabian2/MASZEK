@@ -45,6 +45,8 @@ function updateCalc() {
     setTimeout(function () { cover.remove(); }, 1400);
   }
 
+  if (cover && !root.classList.contains('is-covered')) cover.remove();
+
   if (cover && root.classList.contains('is-covered')) {
     if (location.hash || window.scrollY > 8) {
       openSite(true);
@@ -579,6 +581,272 @@ services.addEventListener("mousemove", function(event) {
     }
 
 });
-/*Alex*/
-card.style.setProperty("--x", x + "px");
-card.style.setProperty("--y", y + "px");
+
+
+(function () {
+  'use strict';
+
+  const doc = document;
+  const root = doc.documentElement;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function isAuth() { return false; }
+  function closeResults() { results.classList.remove('is-open'); }
+
+  const PROS = [
+    { n: 'Szabó Gergely', t: 'Villanyszerelés', k: 'villanyszerelő villany', c: 'Budapest', r: 4.9, j: 126, p: '25 000 Ft / kiállás' },
+    { n: 'Tóth Bence', t: 'Villanyszerelés', k: 'villanyszerelő villany', c: 'Debrecen', r: 4.8, j: 84, p: '24 000 Ft / kiállás' },
+    { n: 'Kiss Dávid', t: 'Vízvezeték', k: 'vízvezeték-szerelő víz csap', c: 'Szeged', r: 4.9, j: 97, p: '30 000 Ft / pont' },
+    { n: 'Horváth Péter', t: 'Vízvezeték', k: 'vízvezeték-szerelő víz csap', c: 'Győr', r: 4.7, j: 61, p: '28 000 Ft / pont' },
+    { n: 'Varga Zsolt', t: 'Festés', k: 'festő mázoló tapéta', c: 'Szombathely', r: 5.0, j: 143, p: '15 000 Ft / m²' },
+    { n: 'Molnár Ádám', t: 'Festés', k: 'festő mázoló tapéta', c: 'Pécs', r: 4.8, j: 72, p: '14 500 Ft / m²' },
+    { n: 'Nagy László', t: 'Kőművesmunka', k: 'kőműves vakolás', c: 'Miskolc', r: 4.7, j: 58, p: '12 000 Ft / m²' },
+    { n: 'Farkas Imre', t: 'Burkolás', k: 'burkoló csempe járólap', c: 'Kecskemét', r: 4.9, j: 88, p: '9 500 Ft / m²' },
+    { n: 'Balogh Márton', t: 'Asztalos', k: 'asztalos bútor', c: 'Veszprém', r: 4.8, j: 49, p: '8 000 Ft / óra' },
+    { n: 'Papp Tamás', t: 'Fűtésszerelés', k: 'fűtésszerelő kazán radiátor', c: 'Székesfehérvár', r: 4.6, j: 41, p: '18 000 Ft / radiátor' },
+    { n: 'Takács Norbert', t: 'Klímaszerelés', k: 'klímaszerelő klíma', c: 'Budapest', r: 4.9, j: 112, p: '45 000 Ft / db' },
+    { n: 'Juhász Attila', t: 'Tetőfedés', k: 'tetőfedő tető', c: 'Zalaegerszeg', r: 4.7, j: 37, p: '11 000 Ft / m²' },
+    { n: 'Simon Roland', t: 'Nyílászárók', k: 'ablak ajtó redőny', c: 'Nyíregyháza', r: 4.8, j: 63, p: '22 000 Ft / db' },
+    { n: 'Lakatos Gábor', t: 'Lakatos, zárszerelő', k: 'lakatos zár zárszerelő', c: 'Budapest', r: 4.9, j: 154, p: '18 000 Ft / kiállás' },
+    { n: 'Mészáros Viktor', t: 'Kertészet', k: 'kertész kert fűnyírás', c: 'Eger', r: 4.8, j: 76, p: '3 500 Ft / m²' },
+    { n: 'Oláh Katalin', t: 'Takarítás', k: 'takarító takarítás', c: 'Budapest', r: 5.0, j: 201, p: '4 500 Ft / óra' },
+    { n: 'Fehér Zoltán', t: 'Költöztetés', k: 'költöztető szállítás', c: 'Szolnok', r: 4.6, j: 55, p: '9 000 Ft / óra' },
+    { n: 'Kovács Anna', t: 'Magántanár', k: 'tanár korrepetálás matematika', c: 'Szombathely', r: 5.0, j: 168, p: '6 000 Ft / óra' },
+    { n: 'Németh Eszter', t: 'Nyelvoktatás', k: 'nyelvtanár angol német', c: 'Budapest', r: 4.9, j: 132, p: '6 500 Ft / óra' },
+    { n: 'Gál Boglárka', t: 'Zenetanár', k: 'zene zongora gitár', c: 'Pécs', r: 4.8, j: 47, p: '5 500 Ft / óra' },
+    { n: 'Sípos Máté', t: 'Számítástechnika', k: 'informatikus számítógép laptop', c: 'Debrecen', r: 4.8, j: 119, p: '8 000 Ft / óra' },
+    { n: 'Bíró Krisztián', t: 'Autószerelés', k: 'autószerelő autó szerviz', c: 'Győr', r: 4.7, j: 93, p: '12 000 Ft / óra' },
+    { n: 'Szűcs Dóra', t: 'Fotózás', k: 'fotós fotó', c: 'Budapest', r: 4.9, j: 66, p: '40 000 Ft / alkalom' },
+    { n: 'Pál Renáta', t: 'Fodrász, kozmetikus', k: 'fodrász kozmetikus haj', c: 'Szeged', r: 4.8, j: 109, p: '9 000 Ft / alkalom' },
+    { n: 'Rácz Sándor', t: 'Barkács, kisjavítás', k: 'barkács szerelő javítás', c: 'Kaposvár', r: 4.7, j: 138, p: '7 000 Ft / óra' },
+    { n: 'Vincze Lajos', t: 'Szárazépítés', k: 'gipszkarton álmennyezet', c: 'Tatabánya', r: 4.8, j: 52, p: '7 500 Ft / m²' }
+  ];
+
+  function esc(str) {
+    return String(str).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+  function norm(v) {
+    return String(v).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+      .replace(/ő/g, 'o').replace(/ű/g, 'u');
+  }
+  function stem(t) {
+    if (t.length >= 7) return t.slice(0, -2);
+    if (t.length >= 4) return t.slice(0, -1);
+    return t;
+  }
+  function initials(name) {
+    return name.split(' ').map(function (w) { return w.charAt(0); }).slice(0, 2).join('');
+  }
+  function stars(r) {
+    return '★ ' + r.toFixed(1).replace('.', ',');
+  }
+  PROS.forEach(function (p) { p.hay = norm([p.n, p.t, p.k, p.c].join(' ')); });
+
+  function searchPros(q) {
+    const tokens = norm(q).split(/\s+/).filter(Boolean).map(stem);
+    if (!tokens.length) return [];
+    return PROS.filter(function (p) {
+      return tokens.every(function (t) { return p.hay.indexOf(t) !== -1; });
+    }).sort(function (a, b) { return b.r - a.r || b.j - a.j; });
+  }
+
+  const gateEyebrow = doc.getElementById('gate-eyebrow');
+  const gateTitle = doc.getElementById('gate-title');
+  const gateText = doc.getElementById('gate-text');
+  const gateChip = doc.getElementById('gate-chip');
+
+  function openGate(reason, data) {
+    let eyebrow = 'Vágjunk bele!';
+    let title = 'Lépj be a folytatáshoz';
+    let text = 'Jelentkezz be vagy regisztrálj, és máris megtalálhatod a számodra megfelelő szakembert.';
+    let chip = '';
+    if (reason === 'search') {
+      eyebrow = 'Keresés';
+      title = 'A kereséshez be kell lépned';
+      text = 'A keresés a regisztrált tagjaink számára érhető el. Lépj be, vagy hozz létre egy ingyenes fiókot.';
+      if (data && data.q) chip = '<span class="gc-ico">🔍</span><span class="gc-main"><b>' + esc(data.q) + '</b><small>' + (data.count ? data.count + ' szakember vár erre' : 'a keresésed') + '</small></span>';
+    } else if (reason === 'pick') {
+      eyebrow = 'Szakember kiválasztása';
+      title = 'Jelentkezz be a kiválasztáshoz';
+      text = 'Lépj be, és felveheted a kapcsolatot a szakemberrel, megbeszélhetitek az időpontot és az árat.';
+      if (data && data.pro) {
+        const p = data.pro;
+        chip = '<span class="pro-avatar">' + esc(initials(p.n)) + '</span><span class="gc-main"><b>' + esc(p.n) + '</b><small>' + esc(p.t) + ' · ' + esc(p.c) + ' · ' + stars(p.r) + '</small></span>';
+      }
+    }
+    gateEyebrow.textContent = eyebrow;
+    gateTitle.textContent = title;
+    gateText.textContent = text;
+    gateChip.innerHTML = chip;
+    gateChip.hidden = !chip;
+    window.openModal('gate');
+  }
+
+  const startBtn = doc.getElementById('startBtn');
+  if (startBtn) {
+    startBtn.addEventListener('click', function () {
+      if (isAuth()) {
+        const t = doc.getElementById('szolgaltatasok');
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        openGate('start');
+      }
+    });
+  }
+
+  const input = doc.getElementById('searchInput');
+  const btn = doc.getElementById('searchBtn');
+  const suggest = doc.getElementById('searchSuggest');
+  const results = doc.getElementById('searchResults');
+  const srInner = doc.getElementById('srInner');
+  if (!input || !suggest || !results) return;
+
+  let items = [];
+  let active = -1;
+
+  function mark(text, q) {
+    const tokens = norm(q).split(/\s+/).filter(Boolean).map(stem);
+    const plain = norm(text);
+    let ranges = [];
+    tokens.forEach(function (t) {
+      const i = plain.indexOf(t);
+      if (i !== -1) ranges.push([i, i + t.length]);
+    });
+    if (!ranges.length) return esc(text);
+    ranges.sort(function (a, b) { return a[0] - b[0]; });
+    let out = '', pos = 0;
+    ranges.forEach(function (r) {
+      if (r[0] < pos) return;
+      out += esc(text.slice(pos, r[0])) + '<mark>' + esc(text.slice(r[0], r[1])) + '</mark>';
+      pos = r[1];
+    });
+    return out + esc(text.slice(pos));
+  }
+
+  function openSuggest() {
+    suggest.classList.add('is-open');
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function closeSuggest() {
+    suggest.classList.remove('is-open');
+    input.setAttribute('aria-expanded', 'false');
+    active = -1;
+  }
+
+  function renderSuggest() {
+    const q = input.value.trim();
+    if (!q) { closeSuggest(); return; }
+    const found = searchPros(q);
+    items = found.slice(0, 5);
+    active = -1;
+    const lock = isAuth() ? '' : '<span class="suggest-lock" title="Bejelentkezés szükséges">🔒</span>';
+    if (!items.length) {
+      suggest.innerHTML = '<div class="suggest-empty">Erre még nincs találat. Próbáld így: <b>villanyszerelő</b>, <b>festő</b> vagy <b>magántanár</b>.</div>';
+    } else {
+      suggest.innerHTML = '<div class="suggest-head">Szakemberek · bemutató profilok</div>' + items.map(function (p, i) {
+        return '<button type="button" class="suggest-item" role="option" data-i="' + i + '">' +
+          '<span class="pro-avatar">' + esc(initials(p.n)) + '</span>' +
+          '<span class="suggest-main"><span class="suggest-name">' + mark(p.n, q) + '</span>' +
+          '<span class="suggest-sub">' + mark(p.t, q) + ' · ' + mark(p.c, q) + '</span></span>' +
+          '<span class="suggest-rating">' + stars(p.r) + '</span>' + lock + '</button>';
+      }).join('') + (found.length > items.length ? '<div class="suggest-more">+ ' + (found.length - items.length) + ' további találat</div>' : '');
+    }
+    openSuggest();
+  }
+
+  function setActive(i) {
+    const nodes = suggest.querySelectorAll('.suggest-item');
+    if (!nodes.length) return;
+    active = (i + nodes.length) % nodes.length;
+    nodes.forEach(function (n, k) { n.classList.toggle('is-active', k === active); });
+    nodes[active].scrollIntoView({ block: 'nearest' });
+  }
+
+  function pick(p) {
+    closeSuggest();
+    if (!isAuth()) { openGate('pick', { pro: p }); return; }
+    input.value = p.n;
+    runSearch();
+  }
+
+  suggest.addEventListener('mousedown', function (e) { e.preventDefault(); });
+  suggest.addEventListener('click', function (e) {
+    const it = e.target.closest('.suggest-item');
+    if (it) pick(items[+it.dataset.i]);
+  });
+  input.addEventListener('input', renderSuggest);
+  input.addEventListener('focus', function () { if (input.value.trim()) renderSuggest(); });
+  input.addEventListener('blur', function () { setTimeout(closeSuggest, 120); });
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (!suggest.classList.contains('is-open')) renderSuggest(); setActive(active + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+    else if (e.key === 'Escape') { closeSuggest(); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (active > -1 && items[active]) pick(items[active]);
+      else runSearch();
+    }
+  });
+  btn.addEventListener('click', runSearch);
+
+  function shakeInput() {
+    const wrap = doc.getElementById('heroSearch');
+    wrap.classList.remove('is-shaking');
+    void wrap.offsetWidth;
+    wrap.classList.add('is-shaking');
+    input.focus();
+  }
+
+  function runSearch() {
+    const q = input.value.trim();
+    closeSuggest();
+    if (!q) { shakeInput(); return; }
+    const found = searchPros(q);
+    if (!isAuth()) {
+      openGate('search', { q: q, count: found.length });
+      return;
+    }
+    renderResults(q, found);
+  }
+
+  const selected = {};
+  function renderResults(q, found) {
+    let html = '<div class="sr-head"><h3>' + (found.length ? found.length + ' találat' : 'Nincs találat') +
+      ' <span>erre: „' + esc(q) + '”</span></h3>' +
+      '<button type="button" class="sr-close" id="srClose" aria-label="Találatok bezárása">✕</button></div>';
+    if (!found.length) {
+      html += '<p class="sr-empty">Erre még nincs szakember a rendszerben. Próbálj másik szakmát vagy várost.</p>';
+    } else {
+      html += '<div class="pro-grid">' + found.map(function (p, i) {
+        const on = !!selected[p.n];
+        return '<article class="pro-card" style="--sd:' + Math.min(i * 0.07, 0.5) + 's">' +
+          '<div class="pro-top"><span class="pro-avatar">' + esc(initials(p.n)) + '</span>' +
+          '<div class="pro-who"><h4>' + esc(p.n) + '</h4><span>' + esc(p.t) + ' · ' + esc(p.c) + '</span></div>' +
+          '<span class="pro-rating">' + stars(p.r) + '</span></div>' +
+          '<div class="pro-meta"><span>' + p.j + ' elvégzett munka</span><span>' + esc(p.p) + '</span></div>' +
+          '<button type="button" class="btn btn-teal pro-pick' + (on ? ' is-selected' : '') + '" data-name="' + esc(p.n) + '">' +
+          (on ? '✓ Kiválasztva' : 'Kiválasztom') + '</button></article>';
+      }).join('') + '</div>';
+    }
+    srInner.innerHTML = html;
+    results.classList.add('is-open');
+    if (!reduceMotion) setTimeout(function () {
+      const r = results.getBoundingClientRect();
+      if (r.bottom > window.innerHeight) window.scrollBy({ top: r.bottom - window.innerHeight + 24, behavior: 'smooth' });
+    }, 350);
+  }
+
+  results.addEventListener('click', function (e) {
+    if (e.target.closest('#srClose')) { closeResults(); return; }
+    const b = e.target.closest('.pro-pick');
+    if (!b) return;
+    const p = PROS.find(function (x) { return x.n === b.dataset.name; });
+    if (!p) return;
+    if (!isAuth()) { openGate('pick', { pro: p }); return; }
+    selected[p.n] = !selected[p.n];
+    b.classList.toggle('is-selected', !!selected[p.n]);
+    b.textContent = selected[p.n] ? '✓ Kiválasztva' : 'Kiválasztom';
+  });
+})();

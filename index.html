@@ -6,7 +6,21 @@
     <title>MASZEK</title>
     <link rel="icon" type="image/png" href="assets/image/maszek_logo.svg">
     <script>
-        document.documentElement.classList.add('js', 'is-covered');
+        (function () {
+            var r = document.documentElement, f = '';
+            try { f = sessionStorage.getItem('maszek_pt') || ''; sessionStorage.removeItem('maszek_pt'); } catch (e) {}
+            if (f) {
+                r.classList.add('pt-arrive');
+                if (f === 'back') r.classList.add('pt-back');
+                setTimeout(function () { r.classList.add('pt-go', 'pt-done'); }, 4000);
+            }
+        })();
+    </script>
+    <script>
+        document.documentElement.classList.add('js');
+        if (!document.documentElement.classList.contains('pt-arrive')) {
+            document.documentElement.classList.add('is-covered');
+        }
         setTimeout(function () {
             if (!document.documentElement.classList.contains('js-ready')) {
                 document.documentElement.classList.remove('js', 'is-covered');
@@ -14,8 +28,15 @@
         }, 3000);
     </script>
     <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="assets/style/transition.css">
 </head>
 <body>
+    <div class="pt" id="pt" aria-hidden="true">
+        <div class="pt-inner">
+            <img class="pt-logo" src="assets/image/maszek_fullLogo.png" alt="">
+            <span class="pt-bar"></span>
+        </div>
+    </div>
     <div class="scroll-progress" aria-hidden="true"></div>
     <div class="cover" id="cover" role="region" aria-label="Üdvözlő képernyő">
         <div class="cover-icons" aria-hidden="true">
@@ -73,11 +94,11 @@
             </a>
         </nav>
         <div class="auth-btns">
-            <button class="btn btn-outline" aria-label="Bejelentkezés">
+            <button class="btn btn-outline" data-go="registration.html#belepes" aria-label="Bejelentkezés">
                 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
                 <span class="btn-label">Bejelentkezés</span>
             </button>
-            <button class="btn btn-primary" aria-label="Regisztráció">
+            <button class="btn btn-primary" data-go="registration.html#regisztracio" aria-label="Regisztráció">
                 <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M19 8v6M16 11h6"/></svg>
                 <span class="btn-label">Regisztráció</span>
             </button>
@@ -88,15 +109,19 @@
         <div class="wrap">
             <h1>SZAKEMBER KERESŐ <span>PLATFORM</span></h1>
             <p class="hero-sub"><b>Megbízható szakembert keresel? Találd meg egyszerűen, gyorsan és biztonságosan!</b> Böngéssz a különböző területek szakemberei között, hasonlítsd össze a lehetőségeket, és találd meg azt, aki a legjobban illik az igényeidhez.</p>
-            <div class="hero-search-wrap">
+            <div class="hero-search-wrap" id="heroSearch">
                 <div class="search-input">
                     <span>🔍</span>
-                    <input type="text" placeholder="Milyen szakembert keresel? (pl. villanyszerelő, festő, stb.)">
+                    <input type="text" id="searchInput" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="searchSuggest" placeholder="Milyen szakembert keresel? (pl. villanyszerelő, festő, stb.)">
                 </div>
-                <button class="btn btn-primary">Keresés</button>
+                <button class="btn btn-primary" type="button" id="searchBtn">Keresés</button>
+                <div class="search-suggest" id="searchSuggest" role="listbox" aria-label="Javasolt szakemberek"></div>
+            </div>
+            <div class="search-results" id="searchResults" aria-live="polite">
+                <div class="sr-inner" id="srInner"></div>
             </div>
             <div class="hero-cta">
-                <button class="btn btn-teal">VÁGJUNK BELE</button>
+                <button class="btn btn-teal" type="button" id="startBtn">VÁGJUNK BELE</button>
             </div>
             <div class="platform-preview-grid">
                 <div class="preview-card">
@@ -371,6 +396,37 @@
         </div>
     </div>
 
+    <div class="modal" id="modal-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
+        <div class="modal-dialog gate-dialog">
+            <button class="modal-close" type="button" data-close aria-label="Bezárás">✕</button>
+
+            <div class="gate-art" data-m style="--m:0" aria-hidden="true">
+                <svg class="gate-ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/></svg>
+                <svg class="gate-lock" viewBox="0 0 48 48">
+                    <path class="gate-shackle" d="M16 21v-6a8 8 0 0 1 16 0v6"/>
+                    <rect x="10" y="21" width="28" height="21" rx="5"/>
+                    <circle cx="24" cy="30" r="2.6"/>
+                    <path d="M24 32.5v4.5"/>
+                </svg>
+                <i class="gate-float" style="--x:4%;--y:20%;--fd:0s">🔧</i>
+                <i class="gate-float" style="--x:84%;--y:14%;--fd:1.2s">⚡</i>
+                <i class="gate-float" style="--x:90%;--y:64%;--fd:0.6s">🎨</i>
+                <i class="gate-float" style="--x:2%;--y:68%;--fd:1.8s">💧</i>
+            </div>
+
+            <span class="modal-eyebrow" id="gate-eyebrow" data-m style="--m:1">Vágjunk bele!</span>
+            <h2 id="gate-title" data-m style="--m:2">Lépj be a folytatáshoz</h2>
+            <p class="gate-text" id="gate-text" data-m style="--m:3"></p>
+            <div class="gate-chip" id="gate-chip" data-m style="--m:4" hidden></div>
+            <div class="gate-actions" data-m style="--m:5">
+                <button class="btn btn-primary" type="button" data-go="registration.html#belepes">Bejelentkezés</button>
+                <button class="btn btn-teal" type="button" data-go="registration.html#regisztracio">Regisztráció</button>
+            </div>
+            <p class="gate-note" data-m style="--m:6">A regisztráció ingyenes és csak egy percet vesz igénybe.</p>
+        </div>
+    </div>
+
+    <script src="assets/script/transition.js"></script>
     <script src="assets/script/script.js"></script>
 </body>
 </html>

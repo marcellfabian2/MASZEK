@@ -1738,3 +1738,436 @@ button, input, textarea{ font-family: inherit; }
     position: relative;
     z-index: 2;
 }
+
+
+@media (min-width: 1500px) and (min-height: 860px){
+    :root{
+        --ctl-h:clamp(47.5px,6.2dvh,67.5px);
+        --gap:clamp(10px,1.5dvh,17.5px);
+        --dot:clamp(32.5px,4.2dvh,42.5px);
+        --panel-radius:187.5px;
+    }
+    body{
+        padding:20px 25px;
+    }
+    .shell{
+        width:min(1350px,100%);
+        height:min(1000px,calc(100dvh - 40px));
+    }
+    .form-view{
+        padding:clamp(17.5px,2.6dvh,32.5px) 70px;
+    }
+    .back-link, .switch-link{
+        font-size:17.5px;
+    }
+    .view-head{
+        margin:0 0 clamp(10px,1.8dvh,20px);
+    }
+    .eyebrow{
+        font-size:15px;
+        margin-bottom:5px;
+    }
+    .view-head h1{
+        font-size:clamp(30px,4.4dvh,47.5px);
+        margin-bottom:5px;
+    }
+    .lead{
+        font-size:18.8px;
+    }
+    .field label{
+        font-size:16.2px;
+        margin-bottom:6.2px;
+    }
+    .field label .opt, .field label .count{
+        font-size:15px;
+    }
+    .control .lead-ico{
+        left:20px;
+    }
+    .control input{
+        padding:0 60px 0 57.5px;
+        font-size:20px;
+    }
+    .control:has(.eye) input{
+        padding-right:105px;
+    }
+    .field[data-field="szuldatum"] input{
+        padding-right:20px;
+    }
+    .control textarea{
+        padding:13.8px 17.5px 13.8px 57.5px;
+        font-size:18.8px;
+    }
+    .ico{
+        width:22.5px;
+        height:22.5px;
+    }
+    .state-ico{
+        right:17.5px;
+        width:30px;
+        height:30px;
+    }
+    .state-ico svg{
+        width:17.5px;
+        height:17.5px;
+    }
+    .state-ico.bad svg{
+        width:20px;
+        height:20px;
+    }
+    .control:has(.eye) .state-ico{
+        right:62.5px;
+    }
+    .field[data-field="szuldatum"] .state-ico{
+        right:57.5px;
+    }
+    .eye{
+        right:10px;
+        width:47.5px;
+        height:47.5px;
+    }
+    .eye svg{
+        width:25px;
+        height:25px;
+    }
+    .hint{
+        font-size:15.6px;
+        margin-top:6.2px;
+    }
+    .msg p{
+        font-size:16.2px;
+    }
+    .chip-add{
+        font-size:15.6px;
+        padding:5px 13.8px;
+    }
+    .pw-pop{
+        padding:15px 17.5px;
+    }
+    .meter-label{
+        font-size:15.6px;
+        min-width:135px;
+    }
+    .rules li{
+        font-size:15.6px;
+        padding:5px 13.8px 5px 6.2px;
+    }
+    .rule-dot{
+        width:20px;
+        height:20px;
+    }
+    .stepper .dot{
+        font-size:17.5px;
+    }
+    .stepper .dot svg{
+        width:22.5px;
+        height:22.5px;
+    }
+    .stepper .lbl{
+        font-size:15.6px;
+    }
+    .types{
+        gap:17.5px;
+    }
+    .tc-inner{
+        padding:12.5px 12.5px 17.5px;
+    }
+    .tc-badge{
+        width:35px;
+        height:35px;
+    }
+    .tc-art{
+        height:clamp(105px,17dvh,172.5px);
+    }
+    .tc-title{
+        font-size:clamp(20px,2.7dvh,26.2px);
+    }
+    .tc-sub{
+        font-size:16.9px;
+    }
+    .tc-perks{
+        font-size:15.6px;
+    }
+    .tc-float{
+        font-size:clamp(17.5px,2.6dvh,25px);
+    }
+    .btn{
+        padding:0 32.5px;
+        font-size:20px;
+    }
+    .btn-outline{
+        height:60px;
+        font-size:18.8px;
+    }
+    .form-alert-inner p{
+        font-size:17.5px;
+    }
+    .alert-action{
+        font-size:16.2px;
+        padding:8.8px 15px;
+    }
+    .success h2{
+        font-size:clamp(27.5px,3.6dvh,40px);
+    }
+    .success p{
+        max-width:475px;
+        font-size:19.4px;
+    }
+    .sum span{
+        font-size:16.2px;
+        padding:6.2px 15px;
+    }
+    .success-mark{
+        width:clamp(90px,12dvh,130px);
+        height:clamp(90px,12dvh,130px);
+    }
+    .panel-inner{
+        padding:55px 50px 45px;
+    }
+    .panel-logo{
+        width:212.5px;
+    }
+    .panel-copy{
+        gap:20px;
+    }
+    .chip{
+        font-size:15px;
+        padding:8.8px 20px;
+    }
+    .panel h2{
+        font-size:clamp(40px,3.6vw,60px);
+    }
+    .panel p{
+        max-width:412.5px;
+        font-size:20px;
+    }
+    .panel-icons span{
+        font-size:42.5px;
+    }
+    .trust b{
+        font-size:25px;
+    }
+    .trust span{
+        font-size:13.8px;
+    }
+    .toast{
+        font-size:17.5px;
+        padding:13.8px 20px;
+    }
+}
+
+@media (min-width: 2100px) and (min-height: 1240px){
+    :root{
+        --ctl-h:clamp(55.1px,6.2dvh,78.3px);
+        --gap:clamp(11.6px,1.5dvh,20.3px);
+        --dot:clamp(37.7px,4.2dvh,49.3px);
+        --panel-radius:217.5px;
+    }
+    body{
+        padding:23.2px 29px;
+    }
+    .shell{
+        width:min(1566px,100%);
+        height:min(1160px,calc(100dvh - 46.4px));
+    }
+    .form-view{
+        padding:clamp(20.3px,2.6dvh,37.7px) 81.2px;
+    }
+    .back-link, .switch-link{
+        font-size:20.3px;
+    }
+    .view-head{
+        margin:0 0 clamp(11.6px,1.8dvh,23.2px);
+    }
+    .eyebrow{
+        font-size:17.4px;
+        margin-bottom:5.8px;
+    }
+    .view-head h1{
+        font-size:clamp(34.8px,4.4dvh,55.1px);
+        margin-bottom:5.8px;
+    }
+    .lead{
+        font-size:21.8px;
+    }
+    .field label{
+        font-size:18.8px;
+        margin-bottom:7.2px;
+    }
+    .field label .opt, .field label .count{
+        font-size:17.4px;
+    }
+    .control .lead-ico{
+        left:23.2px;
+    }
+    .control input{
+        padding:0 69.6px 0 66.7px;
+        font-size:23.2px;
+    }
+    .control:has(.eye) input{
+        padding-right:121.8px;
+    }
+    .field[data-field="szuldatum"] input{
+        padding-right:23.2px;
+    }
+    .control textarea{
+        padding:15.9px 20.3px 15.9px 66.7px;
+        font-size:21.8px;
+    }
+    .ico{
+        width:26.1px;
+        height:26.1px;
+    }
+    .state-ico{
+        right:20.3px;
+        width:34.8px;
+        height:34.8px;
+    }
+    .state-ico svg{
+        width:20.3px;
+        height:20.3px;
+    }
+    .state-ico.bad svg{
+        width:23.2px;
+        height:23.2px;
+    }
+    .control:has(.eye) .state-ico{
+        right:72.5px;
+    }
+    .field[data-field="szuldatum"] .state-ico{
+        right:66.7px;
+    }
+    .eye{
+        right:11.6px;
+        width:55.1px;
+        height:55.1px;
+    }
+    .eye svg{
+        width:29px;
+        height:29px;
+    }
+    .hint{
+        font-size:18.1px;
+        margin-top:7.2px;
+    }
+    .msg p{
+        font-size:18.8px;
+    }
+    .chip-add{
+        font-size:18.1px;
+        padding:5.8px 15.9px;
+    }
+    .pw-pop{
+        padding:17.4px 20.3px;
+    }
+    .meter-label{
+        font-size:18.1px;
+        min-width:156.6px;
+    }
+    .rules li{
+        font-size:18.1px;
+        padding:5.8px 15.9px 5.8px 7.2px;
+    }
+    .rule-dot{
+        width:23.2px;
+        height:23.2px;
+    }
+    .stepper .dot{
+        font-size:20.3px;
+    }
+    .stepper .dot svg{
+        width:26.1px;
+        height:26.1px;
+    }
+    .stepper .lbl{
+        font-size:18.1px;
+    }
+    .types{
+        gap:20.3px;
+    }
+    .tc-inner{
+        padding:14.5px 14.5px 20.3px;
+    }
+    .tc-badge{
+        width:40.6px;
+        height:40.6px;
+    }
+    .tc-art{
+        height:clamp(121.8px,17dvh,200.1px);
+    }
+    .tc-title{
+        font-size:clamp(23.2px,2.7dvh,30.4px);
+    }
+    .tc-sub{
+        font-size:19.6px;
+    }
+    .tc-perks{
+        font-size:18.1px;
+    }
+    .tc-float{
+        font-size:clamp(20.3px,2.6dvh,29px);
+    }
+    .btn{
+        padding:0 37.7px;
+        font-size:23.2px;
+    }
+    .btn-outline{
+        height:69.6px;
+        font-size:21.8px;
+    }
+    .form-alert-inner p{
+        font-size:20.3px;
+    }
+    .alert-action{
+        font-size:18.8px;
+        padding:10.2px 17.4px;
+    }
+    .success h2{
+        font-size:clamp(31.9px,3.6dvh,46.4px);
+    }
+    .success p{
+        max-width:551px;
+        font-size:22.5px;
+    }
+    .sum span{
+        font-size:18.8px;
+        padding:7.2px 17.4px;
+    }
+    .success-mark{
+        width:clamp(104.4px,12dvh,150.8px);
+        height:clamp(104.4px,12dvh,150.8px);
+    }
+    .panel-inner{
+        padding:63.8px 58px 52.2px;
+    }
+    .panel-logo{
+        width:246.5px;
+    }
+    .panel-copy{
+        gap:23.2px;
+    }
+    .chip{
+        font-size:17.4px;
+        padding:10.2px 23.2px;
+    }
+    .panel h2{
+        font-size:clamp(46.4px,3.6vw,69.6px);
+    }
+    .panel p{
+        max-width:478.5px;
+        font-size:23.2px;
+    }
+    .panel-icons span{
+        font-size:49.3px;
+    }
+    .trust b{
+        font-size:29px;
+    }
+    .trust span{
+        font-size:15.9px;
+    }
+    .toast{
+        font-size:20.3px;
+        padding:15.9px 23.2px;
+    }
+}

@@ -3910,3 +3910,33 @@ html.is-covered .preview-card{
 @media (min-width: 1800px){ :root{ --tb: 1; } }
 @media (min-width: 2200px){ :root{ --tb: 1.2; } }
 @media (min-width: 3000px){ :root{ --tb: 1.6; } }
+
+
+/* Hullámos szekcióelválasztók */
+.hero, .services-section, .features-section,
+.split-section, .calculator-section {
+    position: relative;
+    border-bottom: 0;
+}
+
+.hero::after, .services-section::after, .features-section::after,
+.split-section::after, .calculator-section::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 36px;
+    background: var(--hullam-szin);
+    pointer-events: none;
+    z-index: 2;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 64' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 30 C180 5 360 55 540 30 S900 5 1080 30 S1260 55 1440 30 V64 H0 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 64' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 30 C180 5 360 55 540 30 S900 5 1080 30 S1260 55 1440 30 V64 H0 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+.hero { --hullam-szin: var(--card-bg); }
+.services-section { --hullam-szin: var(--bg-light); }
+.features-section { --hullam-szin: var(--card-bg); }
+.split-section { --hullam-szin: var(--teal-deep); }
+.calculator-section { --hullam-szin: var(--terrakotta-soft); }

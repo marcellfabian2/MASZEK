@@ -3885,3 +3885,28 @@ html.is-covered .preview-card{
         font-size:48px;
     }
 }
+
+
+/* Topbar: nagy képernyőn középre igazítva, függőlegesen is */
+@media (min-width: 1500px){
+    :root{ --tb: 1.05; }
+    .topbar{
+        display: flex;
+        align-items: center;
+        padding: 0;
+    }
+    .topbar .wrap{
+        width: 100%;
+        max-width: none;
+        justify-content: center;
+        gap: calc(70px * var(--tb));
+    }
+    .brand-mark{ width: auto; height: auto; margin-right: 0; }
+    .logo-full{ width: calc(200px * var(--tb)); }
+    .nav-links{ font-size: calc(20px * var(--tb)); gap: calc(24px * var(--tb)); }
+    .auth-btns{ gap: calc(12px * var(--tb)); }
+    .topbar .btn{ font-size: calc(15px * var(--tb)); padding: calc(12px * var(--tb)) calc(24px * var(--tb)); }
+}
+@media (min-width: 1800px){ :root{ --tb: 1.25; } }
+@media (min-width: 2200px){ :root{ --tb: 1.5; } }
+@media (min-width: 3000px){ :root{ --tb: 2; } }

@@ -28,8 +28,6 @@
             <span class="pt-bar"></span>
         </div>
     </div>
-
-    <!-- Ikonkészlet (SVG sprite) -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <defs>
             <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
@@ -45,9 +43,9 @@
             <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
             <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
             <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
-            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol></defs>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        </defs>
     </svg>
-
     <main class="shell is-booting" id="shell" data-mode="login">
         <section class="forms">
             <div class="form-view is-active" id="view-login" data-view="login">
@@ -57,14 +55,12 @@
                     </a>
                     <button type="button" class="switch-link" data-switch="register">Nincs még fiókod? <b>Regisztráció</b></button>
                 </div>
-
                 <div class="view-body">
                     <header class="view-head rise" style="--i:1">
                         <p class="eyebrow">Üdv újra!</p>
                         <h1>Bejelentkezés</h1>
                         <p class="lead">Lépj be, és folytasd ott, ahol legutóbb abbahagytad.</p>
                     </header>
-
                     <form id="login-form" novalidate autocomplete="on">
                         <div class="form-alert" id="login-alert" role="alert" aria-live="assertive">
                             <div class="form-alert-inner">
@@ -73,7 +69,6 @@
                                 <button type="button" class="alert-action" id="login-alert-action" hidden>Regisztráció</button>
                             </div>
                         </div>
-
                         <div class="field rise" style="--i:2" data-field="fnev_be">
                             <label for="fnev_be">Felhasználónév</label>
                             <div class="control">
@@ -84,7 +79,6 @@
                             </div>
                             <div class="msg"><p></p></div>
                         </div>
-
                         <div class="field rise" style="--i:3" data-field="jelszo_be">
                             <label for="jelszo_be">Jelszó</label>
                             <div class="control">
@@ -97,7 +91,6 @@
                             </div>
                             <div class="msg"><p></p></div>
                         </div>
-
                         <button type="submit" class="btn btn-primary btn-block rise" style="--i:4" id="login-submit">
                             <span class="btn-label">Bejelentkezés <svg class="ico"><use href="#i-arrow-right"/></svg></span>
                             <span class="btn-spinner" aria-hidden="true"></span>
@@ -106,7 +99,6 @@
                     </form>
                 </div>
             </div>
-
             <div class="form-view" id="view-register" data-view="register" inert>
                 <div class="view-top rise" style="--i:0">
                     <a class="back-link" href="index.html" data-go="index.html" data-dir="back">
@@ -114,7 +106,6 @@
                     </a>
                     <button type="button" class="switch-link" data-switch="login">Van már fiókod? <b>Bejelentkezés</b></button>
                 </div>
-
                 <div class="view-body">
                     <div class="reg-flow" id="reg-flow" data-step="1">
                         <header class="view-head rise" style="--i:1">
@@ -122,21 +113,17 @@
                             <h1>Regisztráció</h1>
                             <p class="lead" id="reg-lead">Válaszd ki, hogyan használod a MASZEK-et.</p>
                         </header>
-
                         <ol class="stepper rise" style="--i:2" id="stepper" aria-label="Regisztráció lépései">
                             <li class="is-current" data-step="1"><button type="button" aria-label="1. lépés: Típus"><span class="dot"><b>1</b><svg><use href="#i-check"/></svg></span><span class="lbl">Típus</span></button></li>
                             <li data-step="2"><button type="button" aria-label="2. lépés: Rólad"><span class="dot"><b>2</b><svg><use href="#i-check"/></svg></span><span class="lbl">Rólad</span></button></li>
                             <li data-step="3"><button type="button" aria-label="3. lépés: Elérhetőség"><span class="dot"><b>3</b><svg><use href="#i-check"/></svg></span><span class="lbl">Elérhetőség</span></button></li>
                             <li data-step="4"><button type="button" aria-label="4. lépés: Fiók"><span class="dot"><b>4</b><svg><use href="#i-check"/></svg></span><span class="lbl">Fiók</span></button></li>
                         </ol>
-
                         <form id="register-form" novalidate autocomplete="on">
                             <div class="steps" id="steps">
-
                                 <fieldset class="step is-active" data-step="1">
                                     <legend class="sr-only">Regisztráció típusa</legend>
                                     <div class="types" id="types" role="group" aria-label="Regisztráció típusa">
-
                                         <button type="button" class="type-card" data-type="felhasznalo" aria-pressed="false" style="--tc:#1D9E75; --tc-rgb:29,158,117; --tc-soft:#E1F5EE; --tc-mid:#5DCAA5; --k:0; --fx:-46px">
                                             <span class="tc-inner">
                                                 <span class="tc-glow"></span>
@@ -162,7 +149,6 @@
                                                 </span>
                                             </span>
                                         </button>
-
                                         <button type="button" class="type-card" data-type="mester" aria-pressed="false" style="--tc:#D85A30; --tc-rgb:216,90,48; --tc-soft:#FAECE7; --tc-mid:#F0997B; --k:1; --fx:46px">
                                             <span class="tc-inner">
                                                 <span class="tc-glow"></span>
@@ -190,7 +176,6 @@
                                         </button>
                                     </div>
                                 </fieldset>
-
                                 <fieldset class="step" data-step="2" inert>
                                     <legend class="sr-only">Személyes adatok</legend>
                                     <div class="field" data-field="teljnev">
@@ -225,7 +210,6 @@
                                         <div class="msg"><p></p></div>
                                     </div>
                                 </fieldset>
-
                                 <fieldset class="step" data-step="3" inert>
                                     <legend class="sr-only">Elérhetőségek</legend>
                                     <div class="field" data-field="email">
@@ -262,8 +246,6 @@
                                         <div class="msg"><p></p></div>
                                     </div>
                                 </fieldset>
-
-                                <!-- 4. lépés: Fiók (f_nev, jelszo) -->
                                 <fieldset class="step" data-step="4" inert>
                                     <legend class="sr-only">Fiók adatai</legend>
                                     <div class="field" data-field="felhasznalonev">
@@ -319,7 +301,6 @@
                                     </div>
                                 </fieldset>
                             </div>
-
                             <div class="actions" id="actions" hidden>
                                 <button type="button" class="btn btn-ghost" id="btn-back">
                                     <svg class="ico"><use href="#i-arrow-left"/></svg> Vissza
@@ -331,7 +312,6 @@
                             </div>
                         </form>
                     </div>
-
                     <div class="success" id="success" hidden>
                         <div class="confetti" id="confetti" aria-hidden="true"></div>
                         <svg class="success-mark" viewBox="0 0 52 52" aria-hidden="true">
@@ -348,7 +328,6 @@
                 </div>
             </div>
         </section>
-
         <aside class="panel" aria-label="MASZEK">
             <div class="panel-glow" aria-hidden="true"></div>
             <div class="panel-icons" aria-hidden="true">
@@ -358,10 +337,8 @@
                 <span style="--x:84%;--y:66%;--d:0.7s">🔧</span>
                 <span style="--x:86%;--y:36%;--d:1.8s">🏠</span>
             </div>
-
             <div class="panel-inner">
                 <img class="panel-logo" src="assets/image/maszek_fullLogo.png" alt="MASZEK">
-
                 <div class="panel-copies">
                     <div class="panel-copy for-login">
                         <span class="chip rise-p" style="--p:0">Magyar Szakember Kereső</span>
@@ -376,7 +353,6 @@
                         <button type="button" class="btn btn-outline rise-p" style="--p:3" data-switch="login"><svg class="ico"><use href="#i-arrow-left"/></svg> Bejelentkezés</button>
                     </div>
                 </div>
-
                 <ul class="trust" aria-label="MASZEK számokban">
                     <li><b>120+</b><span>aktív mester</span></li>
                     <li><b>4.9 ★</b><span>átlagos értékelés</span></li>
@@ -384,14 +360,12 @@
                 </ul>
             </div>
         </aside>
-
         <div class="toast" id="toast" role="status" aria-live="polite">
             <svg class="ico"><use href="#i-check"/></svg>
             <span id="toast-text"></span>
             <button type="button" class="toast-action" id="toast-action" hidden></button>
         </div>
     </main>
-
     <script src="assets/script/transition.js"></script>
     <script src="assets/script/registration.js"></script>
 </body>

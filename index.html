@@ -29,6 +29,7 @@
     </script>
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/transition.css">
+    <link rel="stylesheet" href="assets/style/standby.css">
 </head>
 <body>
     <div class="pt" id="pt" aria-hidden="true">
@@ -346,6 +347,7 @@
     <div class="modal" id="modal-about" role="dialog" aria-modal="true" aria-labelledby="modal-about-title" hidden>
         <div class="modal-dialog">
             <button class="modal-close" type="button" data-close aria-label="Bezárás">✕</button>
+
             <span class="modal-eyebrow" data-m style="--m:0">Magyar Szakember Kereső</span>
             <h2 id="modal-about-title" data-m style="--m:1">MI IS AZ A MASZEK?</h2>
             <p class="modal-lead" data-m style="--m:2">
@@ -353,6 +355,7 @@
                 Néhány kattintással megtalálhatod a számodra megfelelőt – akár térképen is –, a munkakérelem,
                 az ajánlatadás és a foglalás pedig könnyen és problémamentesen zajlik.
             </p>
+
             <h3 class="modal-section-title" data-m style="--m:3">Miben vagyunk mások?</h3>
             <div class="modal-grid">
                 <div class="modal-item" data-m style="--m:4">
@@ -380,6 +383,7 @@
                     <div><h4>Admin felügyelet</h4><p>Egy admin felület köti össze a két oldalt, és az egész platform biztonságát kezeli.</p></div>
                 </div>
             </div>
+
             <div class="modal-note" data-m style="--m:10">
                 <strong>Átlátható díjazás.</strong>
                 A mesterek kevés díj fejében hirdethetik magukat: az elvégzett munka végösszegéből egy kisebb rész az oldal
@@ -391,6 +395,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal" id="modal-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
         <div class="modal-dialog gate-dialog">
             <button class="modal-close" type="button" data-close aria-label="Bezárás">✕</button>
@@ -408,6 +413,7 @@
                 <i class="gate-float" style="--x:90%;--y:64%;--fd:0.6s">🎨</i>
                 <i class="gate-float" style="--x:2%;--y:68%;--fd:1.8s">💧</i>
             </div>
+
             <span class="modal-eyebrow" id="gate-eyebrow" data-m style="--m:1">Vágjunk bele!</span>
             <h2 id="gate-title" data-m style="--m:2">Lépj be a folytatáshoz</h2>
             <p class="gate-text" id="gate-text" data-m style="--m:3"></p>
@@ -419,7 +425,9 @@
             <p class="gate-note" data-m style="--m:6">A regisztráció ingyenes és csak egy percet vesz igénybe.</p>
         </div>
     </div>
+
     <script src="assets/script/transition.js"></script>
+    <script src="assets/script/standby.js"></script>
     <script src="assets/script/script.js"></script>
 </body>
 </html>
